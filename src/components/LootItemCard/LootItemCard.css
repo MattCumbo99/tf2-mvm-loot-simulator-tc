@@ -66,12 +66,19 @@
 /* Content */
 .item-name {
   margin: 0 0 6px 0;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #f5f5f5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+  /* Remove overflow hiding and allow wrapping */
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+
+  /* Typography tweaks for multi-line readability */
+  line-height: 1.25;
+  text-align: center;
+  word-break: break-word;
 }
 
 .item-price {

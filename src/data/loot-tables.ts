@@ -7,152 +7,133 @@ export const AUSTRALIUMS: LootItem[] = [
     name: "Australium Scattergun",
     rarity: "legendary",
     price: 92,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/1/1e/Item_icon_Australium_Scattergun.png/95px-Item_icon_Australium_Scattergun.png",
+    image: "/items/aus_scattergun.png",
   },
   {
     id: "aus_force_of_nature",
     name: "Australium Force-a-Nature",
     rarity: "legendary",
     price: 42.14,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/9/92/Item_icon_Australium_Force-a-Nature.png/95px-Item_icon_Australium_Force-a-Nature.png",
+    image: "/items/aus_force_a_nature.png",
   },
   {
     id: "aus_rocket_launcher",
     name: "Australium Rocket Launcher",
     rarity: "legendary",
     price: 100.81,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/4/4e/Item_icon_Australium_Rocket_Launcher.png/95px-Item_icon_Australium_Rocket_Launcher.png",
+    image: "/items/aus_rocket_launcher.png",
   },
   {
     id: "aus_black_box",
     name: "Australium Black Box",
     rarity: "legendary",
     price: 37.86,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/f/f2/Item_icon_Australium_Black_Box.png/95px-Item_icon_Australium_Black_Box.png",
+    image: "/items/aus_black_box.png",
   },
   {
     id: "aus_flamethrower",
     name: "Australium Flame Thrower",
     rarity: "legendary",
     price: 53.6,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/7/70/Item_icon_Australium_Flame_Thrower.png/95px-Item_icon_Australium_Flame_Thrower.png",
+    image: "/items/aus_flame_thrower.png",
   },
   {
     id: "aus_axtinguisher",
     name: "Australium Axtinguisher",
     rarity: "legendary",
     price: 18.07,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/3/33/Item_icon_Australium_Axtinguisher.png/95px-Item_icon_Australium_Axtinguisher.png",
+    image: "/items/aus_axtinguisher.png",
   },
   {
     id: "aus_grenade_launcher",
     name: "Australium Grenade Launcher",
     rarity: "legendary",
     price: 47.58,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/7/71/Item_icon_Australium_Grenade_Launcher.png/95px-Item_icon_Australium_Grenade_Launcher.png",
+    image: "/items/aus_grenade_launcher.png",
   },
   {
     id: "aus_stickybomb_launcher",
     name: "Australium Stickybomb Launcher",
     rarity: "legendary",
     price: 53.28,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/c/cf/Item_icon_Australium_Stickybomb_Launcher.png/95px-Item_icon_Australium_Stickybomb_Launcher.png",
+    image: "/items/aus_stickybomb_launcher.png",
   },
   {
     id: "aus_eyelander",
     name: "Australium Eyelander",
     rarity: "legendary",
     price: 150,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/4/4f/Item_icon_Australium_Eyelander.png/95px-Item_icon_Australium_Eyelander.png",
+    image: "/items/aus_eyelander.png",
   },
   {
     id: "aus_minigun",
     name: "Australium Minigun",
     rarity: "legendary",
     price: 50.99,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/7/71/Item_icon_Australium_Minigun.png/95px-Item_icon_Australium_Minigun.png",
+    image: "/items/aus_minigun.png",
   },
   {
     id: "aus_tomislav",
     name: "Australium Tomislav",
     rarity: "legendary",
     price: 46.99,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/a/a2/Item_icon_Australium_Tomislav.png/95px-Item_icon_Australium_Tomislav.png",
+    image: "/items/aus_tomislav.png",
   },
   {
     id: "aus_frontier_justice",
     name: "Australium Frontier Justice",
     rarity: "legendary",
     price: 41.25,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/4/40/Item_icon_Australium_Frontier_Justice.png/95px-Item_icon_Australium_Frontier_Justice.png",
+    image: "/items/aus_frontier_justice.png",
   },
   {
     id: "aus_wrench",
     name: "Australium Wrench",
     rarity: "legendary",
     price: 64,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/a/a4/Item_icon_Australium_Wrench.png/95px-Item_icon_Australium_Wrench.png",
+    image: "/items/aus_wrench.png",
   },
   {
     id: "aus_blutsauger",
     name: "Australium Blutsauger",
     rarity: "legendary",
     price: 14.69,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/c/cd/Item_icon_Australium_Blutsauger.png/95px-Item_icon_Australium_Blutsauger.png",
+    image: "/items/aus_blutsauger.png",
   },
   {
     id: "aus_medi_gun",
     name: "Australium Medi Gun",
     rarity: "legendary",
     price: 97.21,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/9/91/Item_icon_Australium_Medi_Gun.png/95px-Item_icon_Australium_Medi_Gun.png",
+    image: "/items/aus_medigun.png",
   },
   {
     id: "aus_sniper_rifle",
     name: "Australium Sniper Rifle",
     rarity: "legendary",
     price: 69.59,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/f/fe/Item_icon_Australium_Sniper_Rifle.png/95px-Item_icon_Australium_Sniper_Rifle.png",
+    image: "/items/aus_sniper_rifle.png",
   },
   {
     id: "aus_smg",
     name: "Australium SMG",
     rarity: "legendary",
     price: 20.88,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/b/be/Item_icon_Australium_SMG.png/95px-Item_icon_Australium_SMG.png",
+    image: "/items/aus_smg.png",
   },
   {
     id: "aus_ambassador",
     name: "Australium Ambassador",
     rarity: "legendary",
     price: 29.17,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/8/8f/Item_icon_Australium_Ambassador.png/95px-Item_icon_Australium_Ambassador.png",
+    image: "/items/aus_ambassador.png",
   },
   {
     id: "aus_knife",
     name: "Australium Knife",
     rarity: "legendary",
     price: 39.99,
-    image:
-      "https://wiki.teamfortress.com/w/images/thumb/9/94/Item_icon_Australium_Knife.png/95px-Item_icon_Australium_Knife.png",
+    image: "/items/aus_knife.png",
   },
 ];
 
@@ -161,8 +142,7 @@ export const GOLDEN_PAN: LootItem = {
   name: "The Golden Frying Pan",
   rarity: "mythic",
   price: 7895,
-  image:
-    "https://wiki.teamfortress.com/w/images/thumb/0/0f/Backpack_Golden_Frying_Pan.png/135px-Backpack_Golden_Frying_Pan.png",
+  image: "/items/gold_frying_pan.png",
 };
 
 export const WEAPON_REGISTRY: WeaponDefinition[] = [

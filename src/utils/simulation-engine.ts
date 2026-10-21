@@ -10,7 +10,7 @@ import { TIER_PRICES, type WeaponDefinition } from "../types/weapon-tiers";
  */
 export function simulateTourCompletion(): TourLoot {
   return {
-    basicKitPrice: random(0.07, 0.6),
+    basicKitPrice: random(7, 60) * 0.01,
     specFabricator: randomSpecKit(),
     proFabricator: gambleProKit(),
     australium: gambleAustralium(),
