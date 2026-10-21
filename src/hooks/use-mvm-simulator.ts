@@ -1,12 +1,14 @@
 import { useState } from "react";
-import type { LootItem } from "../types/loot-item";
+import { basicKit, type LootItem } from "../types/loot-item";
 import { simulateTourCompletion } from "../utils/simulation-engine";
 import type { MvmSimulator } from "../types/mvm-simuator";
+import type { TourLoot } from "../types/tour-loot";
 
 const TICKET_COST_PER_TOUR = 0.99 * 4;
 
 export function useMvmSimulator(): MvmSimulator {
   const [inventory, setInventory] = useState<LootItem[]>([]);
+  const [tourHistory, setTourHistory] = useState<TourLoot[]>([]);
   const [toursCompleted, setToursCompleted] = useState(0);
 
   const runSimulation = (count: number) => {
@@ -15,7 +17,10 @@ export function useMvmSimulator(): MvmSimulator {
     for (let i = 0; i < count; i++) {
       const tourLoot = simulateTourCompletion();
 
-      newDrops.push(killstreakKit(tourLoot.basicKitPrice));
+      // Add this tour to the history
+      setTourHistory((prev) => [tourLoot, ...prev]);
+
+      newDrops.push(basicKit(tourLoot.basicKitPrice));
 
       // Add guaranteed spec fabricator
       newDrops.push(tourLoot.specFabricator);
@@ -32,6 +37,7 @@ export function useMvmSimulator(): MvmSimulator {
 
   const resetSimulation = () => {
     setInventory([]);
+    setTourHistory([]);
     setToursCompleted(0);
   };
 
@@ -42,6 +48,7 @@ export function useMvmSimulator(): MvmSimulator {
     totalSpent > 0 ? (totalLootValue / totalSpent) * 100 : 0;
 
   return {
+    tours: tourHistory,
     inventory,
     stats: {
       toursCompleted,
@@ -52,15 +59,5 @@ export function useMvmSimulator(): MvmSimulator {
     },
     runSimulation,
     resetSimulation,
-  };
-}
-
-function killstreakKit(price: number): LootItem {
-  return {
-    id: "killstreak_kit",
-    name: "Killstreak Kit",
-    rarity: "common",
-    price: price,
-    // TODO: Image
   };
 }

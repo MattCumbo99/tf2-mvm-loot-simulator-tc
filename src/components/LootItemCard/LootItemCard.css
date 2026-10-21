@@ -1,0 +1,109 @@
+.loot-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1e1e1e;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 12px;
+  width: 180px;
+  box-sizing: border-box;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.loot-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.loot-card-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.rarity-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+}
+
+/* Image container */
+.loot-card-media {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.item-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.item-image-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Content */
+.item-name {
+  margin: 0 0 6px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4ade80; /* Profit green */
+}
+
+/* --- Rarity Color Variants --- */
+
+/* Adapt these string checks to match whatever values exist in your ItemRarity enum/type */
+.rarity-common {
+  border-color: #4a4a4a;
+}
+/* Standard TF2 High Tiers */
+.rarity-uncommon {
+  border-color: #7ea958;
+}
+
+.rarity-rare {
+  border-color: #a50f15;
+  box-shadow: 0 0 8px rgba(165, 15, 21, 0.3);
+}
+
+.rarity-legendary {
+  border-color: #ffd700;
+  background: linear-gradient(135deg, #2a2400 0%, #1e1e1e 100%);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.rarity-mythic {
+  border-color: #fff3a1;
+  background: linear-gradient(135deg, #423200 0%, #1e1e1e 100%);
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.8);
+}

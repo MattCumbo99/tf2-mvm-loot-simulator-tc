@@ -1,0 +1,13 @@
+.tour-loot-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background-color: #121212;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
