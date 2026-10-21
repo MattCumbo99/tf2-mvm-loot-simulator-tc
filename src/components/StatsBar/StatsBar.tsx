@@ -31,9 +31,13 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
       <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
         <label>Net Profit / Loss</label>
         <span>
-          {isProfitable ? "+" : ""}${stats.netProfit.toFixed(2)} (
-          {stats.roiPercentage.toFixed(1)}% ROI)
+          {isProfitable ? "+" : "-"}${Math.abs(stats.netProfit).toFixed(2)}
         </span>
+      </div>
+
+      <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
+        <label>Returns on Interest</label>
+        <span>{stats.roiPercentage.toFixed(1)}%</span>
       </div>
 
       <div className="actions">
