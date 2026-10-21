@@ -9,35 +9,51 @@ import {
 } from "../../types/loot-item";
 
 interface Props {
+  tourNumber: number;
   tourRewards: TourLoot;
 }
 
-export const TourSummaryCard: React.FC<Props> = ({ tourRewards }) => {
+export const TourSummaryCard: React.FC<Props> = ({
+  tourNumber,
+  tourRewards,
+}) => {
   const roboPartItem = robotPartsCommon(tourRewards.robotParts.common);
   const hasPristineParts = tourRewards.robotParts.rare > 0;
 
   return (
-    <div className="tour-loot-container">
-      <LootItemCard item={roboPartItem} />
+    <div className="tour-summary-card">
+      <div className="tour-card-header">
+        <h3 className="tour-number-title">
+          Tour <span className="tour-number-highlight">#{tourNumber}</span>
+        </h3>
+      </div>
 
-      {hasPristineParts && (
-        <LootItemCard item={robotPartsPristine(tourRewards.robotParts.rare)} />
-      )}
+      <div className="tour-loot-container">
+        <LootItemCard item={roboPartItem} />
 
-      <LootItemCard item={basicKit(tourRewards.basicKitPrice)} />
+        {hasPristineParts && (
+          <LootItemCard
+            item={robotPartsPristine(tourRewards.robotParts.rare)}
+          />
+        )}
 
-      <LootItemCard item={tourRewards.specFabricator} />
+        <LootItemCard item={basicKit(tourRewards.basicKitPrice)} />
 
-      {/* Any additional fabricators earned */}
-      {tourRewards.additionalSpecFabs.map((fab) => (
-        <LootItemCard item={fab} />
-      ))}
+        <LootItemCard item={tourRewards.specFabricator} />
 
-      {tourRewards.proFabricator && (
-        <LootItemCard item={tourRewards.proFabricator} />
-      )}
+        {/* Any additional fabricators earned */}
+        {tourRewards.additionalSpecFabs.map((fab) => (
+          <LootItemCard item={fab} />
+        ))}
 
-      {tourRewards.australium && <LootItemCard item={tourRewards.australium} />}
+        {tourRewards.proFabricator && (
+          <LootItemCard item={tourRewards.proFabricator} />
+        )}
+
+        {tourRewards.australium && (
+          <LootItemCard item={tourRewards.australium} />
+        )}
+      </div>
     </div>
   );
 };

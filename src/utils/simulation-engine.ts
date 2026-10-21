@@ -10,43 +10,58 @@ import { TIER_PRICES, type WeaponDefinition } from "../types/weapon-tiers";
  */
 export function simulateTourCompletion(): TourLoot {
   return {
-    basicKitPrice: random(7, 60) * 0.01,
-    specFabricator: randomSpecKit(),
-    proFabricator: gambleProKit(),
+    basicKitPrice: calculateKitPrice(),
+    specFabricator: randomSpecFab(),
+    proFabricator: gambleProFab(),
     australium: gambleAustralium(),
     robotParts: {
-      common: random(24, 31),
-      rare: calculatePristineParts(),
+      common: random(20, 27),
+      rare: gamblePristineParts(),
     },
     additionalSpecFabs: gambleAdditionalSpecFabs(),
   };
 }
 
-function calculatePristineParts(): number {
-  const pristineChance = random(1, 16);
+function calculateKitPrice(): number {
+  return random(7, 60) * 0.01;
+}
 
-  if (pristineChance % 4 === 0) {
-    return pristineChance / 4;
+/**
+ * Rolls for a chance at succeeding four different times.
+ *
+ * @param chancePerMission Decimal percentage to succeed.
+ * @returns Number of successes.
+ */
+function rollRewards(chancePerMission: number): number {
+  const minRoll = 100 - 100 * chancePerMission;
+  const missionCount = 4;
+  let rewardAmount = 0;
+
+  for (let i = 0; i < missionCount; i++) {
+    const roll = random(1, 100);
+
+    if (roll >= minRoll) {
+      rewardAmount++;
+    }
   }
 
-  return 0;
+  return rewardAmount;
+}
+
+function gamblePristineParts(): number {
+  return rollRewards(0.17);
 }
 
 function gambleAdditionalSpecFabs(): LootItem[] {
-  const specFabChance = random(1, 40);
+  const rewardedKits = rollRewards(0.05);
 
-  if (specFabChance % 10 === 0) {
-    const additionalFabs: LootItem[] = [];
-    const fabAmount = specFabChance / 10;
+  const specFabs: LootItem[] = [];
 
-    for (let i = 0; i < fabAmount; i++) {
-      additionalFabs.push(randomSpecKit());
-    }
-
-    return additionalFabs;
+  for (let i = 0; i < rewardedKits; i++) {
+    specFabs.push(randomSpecFab());
   }
 
-  return [];
+  return specFabs;
 }
 
 function random(min: number, max: number): number {
@@ -57,7 +72,7 @@ function randomWeapon(): WeaponDefinition {
   return WEAPON_REGISTRY.at(random(0, WEAPON_REGISTRY.length - 1))!!;
 }
 
-function randomSpecKit(): LootItem {
+function randomSpecFab(): LootItem {
   const chosenWeapon = randomWeapon();
   const specPrice = chosenWeapon.customSpecPrice
     ? chosenWeapon.customSpecPrice
@@ -72,7 +87,7 @@ function randomSpecKit(): LootItem {
  *
  * @returns The earned Professional Killstreak Kit, or null if not earned.
  */
-function gambleProKit(): LootItem | null {
+function gambleProFab(): LootItem | null {
   const hasEarnedProKit = random(1, 100) >= 85;
   if (hasEarnedProKit) {
     return randomProKit();

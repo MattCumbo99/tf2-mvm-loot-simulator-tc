@@ -15,9 +15,14 @@ function App() {
         onReset={resetSimulation}
       />
 
-      {tours.map((tour) => (
-        <TourSummaryCard tourRewards={tour} />
-      ))}
+      <div className="tour-history-list">
+        {tours.map((tour, index) => (
+          <TourSummaryCard
+            tourRewards={tour}
+            tourNumber={tours.length - index}
+          />
+        ))}
+      </div>
     </div>
   );
 }
