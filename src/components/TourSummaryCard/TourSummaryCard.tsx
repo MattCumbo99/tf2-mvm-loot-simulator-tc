@@ -7,13 +7,14 @@ import {
   robotPartsCommon,
   robotPartsPristine,
 } from "../../types/loot-item";
+import { memo } from "react";
 
 interface Props {
   tourNumber: number;
   tourRewards: TourLoot;
 }
 
-export const TourSummaryCard: React.FC<Props> = ({
+const TourSummaryCardComponent: React.FC<Props> = ({
   tourNumber,
   tourRewards,
 }) => {
@@ -57,3 +58,5 @@ export const TourSummaryCard: React.FC<Props> = ({
     </div>
   );
 };
+
+export const TourSummaryCard = memo(TourSummaryCardComponent);

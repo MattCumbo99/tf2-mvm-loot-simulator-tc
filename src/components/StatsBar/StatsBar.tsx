@@ -15,23 +15,29 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
     <div className="stats-bar">
       <div className="stat-card">
         <label>Tours Completed</label>
-        <span>{stats.toursCompleted}</span>
+        <span>{stats.toursCompleted.toLocaleString()}</span>
       </div>
 
       <div className="stat-card">
-        <label>Total Spent</label>
-        <span>${stats.totalSpent.toFixed(2)}</span>
+        <label>Money Spent</label>
+        <span>${stats.totalSpent.toLocaleString()}</span>
+      </div>
+
+      <div className="stat-card">
+        <label>Hours Played</label>
+        <span>{(stats.toursCompleted * 2.1).toLocaleString()}</span>
       </div>
 
       <div className="stat-card">
         <label>Loot Value</label>
-        <span>${stats.totalLootValue.toFixed(2)}</span>
+        <span>${stats.totalLootValue.toLocaleString()}</span>
       </div>
 
       <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
         <label>Net Profit / Loss</label>
         <span>
-          {isProfitable ? "+" : "-"}${Math.abs(stats.netProfit).toFixed(2)}
+          {isProfitable ? "+" : "-"}$
+          {Math.abs(stats.netProfit).toLocaleString()}
         </span>
       </div>
 
