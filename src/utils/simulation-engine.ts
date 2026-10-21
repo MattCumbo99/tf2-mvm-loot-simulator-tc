@@ -10,6 +10,7 @@ import { TIER_PRICES, type WeaponDefinition } from "../types/weapon-tiers";
  */
 export function simulateTourCompletion(): TourLoot {
   return {
+    basicKitPrice: random(0.07, 0.6),
     specFabricator: randomSpecKit(),
     proFabricator: gambleProKit(),
     australium: gambleAustralium(),
@@ -17,19 +18,35 @@ export function simulateTourCompletion(): TourLoot {
       common: random(24, 31),
       rare: calculatePristineParts(),
     },
+    additionalSpecFabs: gambleAdditionalSpecFabs(),
   };
 }
 
 function calculatePristineParts(): number {
-  let pristinePartCount = 0;
-
   const pristineChance = random(1, 16);
 
   if (pristineChance % 4 === 0) {
-    pristinePartCount = pristineChance / 4;
+    return pristineChance / 4;
   }
 
-  return pristinePartCount;
+  return 0;
+}
+
+function gambleAdditionalSpecFabs(): LootItem[] {
+  const specFabChance = random(1, 40);
+
+  if (specFabChance % 10 === 0) {
+    const additionalFabs: LootItem[] = [];
+    const fabAmount = specFabChance / 10;
+
+    for (let i = 0; i < fabAmount; i++) {
+      additionalFabs.push(randomSpecKit());
+    }
+
+    return additionalFabs;
+  }
+
+  return [];
 }
 
 function random(min: number, max: number): number {
