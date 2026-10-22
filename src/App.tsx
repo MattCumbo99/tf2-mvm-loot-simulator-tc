@@ -3,7 +3,6 @@ import { LootItemCard } from "./components/LootItemCard/LootItemCard";
 import { StatsBar } from "./components/StatsBar/StatsBar";
 import { TourSummaryCard } from "./components/TourSummaryCard/TourSummaryCard";
 import { useMvmSimulator } from "./hooks/use-mvm-simulator";
-import type { LootItem } from "./types/loot-item";
 
 function App() {
   const {
