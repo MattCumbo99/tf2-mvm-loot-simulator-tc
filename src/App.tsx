@@ -3,16 +3,17 @@ import { LootItemCard } from "./components/LootItemCard/LootItemCard";
 import { StatsBar } from "./components/StatsBar/StatsBar";
 import { TourSummaryCard } from "./components/TourSummaryCard/TourSummaryCard";
 import { useMvmSimulator } from "./hooks/use-mvm-simulator";
+import type { LootItem } from "./types/loot-item";
 
 function App() {
-  const { tours, inventory, stats, runSimulation, resetSimulation } =
-    useMvmSimulator();
-
-  const highValueItems = () => {
-    return inventory
-      .filter((item) => item.price >= 10)
-      .sort((item1, item2) => (item1.price > item2.price ? 0 : 1));
-  };
+  const {
+    tours,
+    australiums,
+    highValueFabs,
+    stats,
+    runSimulation,
+    resetSimulation,
+  } = useMvmSimulator();
 
   return (
     <div className="app-container">
@@ -37,11 +38,24 @@ function App() {
         <div className="valuables-panel">
           <div className="valuables-panel-header">
             <h2>High Value Items</h2>
-            <span className="valuables-count">{highValueItems().length}</span>
+            <span className="valuables-count">{highValueFabs.length}</span>
           </div>
 
           <div className="valuables-scroll-area">
-            {highValueItems().map((item) => (
+            {highValueFabs.map((item) => (
+              <LootItemCard item={item} />
+            ))}
+          </div>
+        </div>
+
+        <div className="valuables-panel">
+          <div className="valuables-panel-header">
+            <h2>Australiums</h2>
+            <span className="valuables-count">{australiums.length}</span>
+          </div>
+
+          <div className="valuables-scroll-area">
+            {australiums.map((item) => (
               <LootItemCard item={item} />
             ))}
           </div>
@@ -49,7 +63,7 @@ function App() {
       </div>
 
       <div className="tour-history-list">
-        {tours.map((tour, index) => (
+        {tours.slice(0, 50).map((tour, index) => (
           <TourSummaryCard
             tourRewards={tour}
             tourNumber={tours.length - index}

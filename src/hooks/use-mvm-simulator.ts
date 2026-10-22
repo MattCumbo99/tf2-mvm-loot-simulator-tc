@@ -8,6 +8,8 @@ const TICKET_COST_PER_TOUR = 0.99 * 4;
 
 export function useMvmSimulator(): MvmSimulator {
   const [inventory, setInventory] = useState<LootItem[]>([]);
+  const [australiums, setAustraliums] = useState<LootItem[]>([]);
+  const [highValueFabs, setHighValueFabs] = useState<LootItem[]>([]);
   const [tourHistory, setTourHistory] = useState<TourLoot[]>([]);
   const [toursCompleted, setToursCompleted] = useState(0);
 
@@ -27,16 +29,31 @@ export function useMvmSimulator(): MvmSimulator {
 
       tourLoot.additionalSpecFabs.forEach((fab) => newDrops.push(fab));
 
-      if (tourLoot.proFabricator) newDrops.push(tourLoot.proFabricator);
-      if (tourLoot.australium) newDrops.push(tourLoot.australium);
+      const earnedProFab = tourLoot.proFabricator;
+      if (earnedProFab) {
+        // Check if this professional kit is high value
+        if (earnedProFab.price >= 10) {
+          setHighValueFabs((prev) => [earnedProFab, ...prev]);
+        }
+
+        newDrops.push(earnedProFab);
+      }
+
+      const earnedAustralium = tourLoot.australium;
+      if (earnedAustralium) {
+        setAustraliums((prev) => [earnedAustralium, ...prev]);
+        newDrops.push(earnedAustralium);
+      }
     }
 
-    setInventory((prev) => [...newDrops, ...prev]);
+    setInventory((prev) => [...prev, ...newDrops]);
     setToursCompleted((prev) => prev + count);
   };
 
   const resetSimulation = () => {
     setInventory([]);
+    setAustraliums([]);
+    setHighValueFabs([]);
     setTourHistory([]);
     setToursCompleted(0);
   };
@@ -50,6 +67,8 @@ export function useMvmSimulator(): MvmSimulator {
   return {
     tours: tourHistory,
     inventory,
+    australiums,
+    highValueFabs,
     stats: {
       toursCompleted,
       totalSpent,
