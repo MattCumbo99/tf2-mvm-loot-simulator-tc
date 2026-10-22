@@ -18,7 +18,11 @@ export const LootItemCard: React.FC<Props> = ({ item }) => {
 
       <div className="loot-card-media">
         {item.image ? (
-          <img src={item.image} alt={item.name} className="item-image" />
+          <img
+            src={`${import.meta.env.BASE_URL}${item.image}`}
+            alt={item.name}
+            className="item-image"
+          />
         ) : (
           <div className="item-image-placeholder">
             <span>{item.name.charAt(0)}</span>
