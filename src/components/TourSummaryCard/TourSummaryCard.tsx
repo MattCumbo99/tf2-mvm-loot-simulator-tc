@@ -2,12 +2,12 @@ import type React from "react";
 import type { TourLoot } from "../../types/tour-loot";
 import "./TourSummaryCard.css";
 import { LootItemCard } from "../LootItemCard/LootItemCard";
+import { memo } from "react";
 import {
   basicKit,
   robotPartsCommon,
   robotPartsPristine,
-} from "../../types/loot-item";
-import { memo } from "react";
+} from "../../data/loot-tables";
 
 interface Props {
   tourNumber: number;
