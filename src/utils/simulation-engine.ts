@@ -1,7 +1,13 @@
-import { AUSTRALIUMS, GOLDEN_PAN, WEAPON_REGISTRY } from "../data/loot-tables";
-import { proFab, specFab, type LootItem } from "../types/loot-item";
+import {
+  AUSTRALIUMS,
+  GOLDEN_PAN,
+  proFab,
+  WEAPON_REGISTRY,
+} from "../data/loot-tables";
+import type { LootItem } from "../types/loot-item";
 import type { TourLoot } from "../types/tour-loot";
-import { TIER_PRICES, type WeaponDefinition } from "../types/weapon-tiers";
+import type { WeaponDefinition } from "../types/weapon-definition";
+import { specFab } from "../data/loot-tables";
 
 /**
  * Simulates the completion of a tour and generates the resulting loot.
@@ -23,7 +29,7 @@ export function simulateTourCompletion(): TourLoot {
 }
 
 function calculateKitPrice(): number {
-  return random(7, 60) * 0.01;
+  return random(40, 75) * 0.01;
 }
 
 /**
@@ -74,11 +80,11 @@ function randomWeapon(): WeaponDefinition {
 
 function randomSpecFab(): LootItem {
   const chosenWeapon = randomWeapon();
-  const specPrice = chosenWeapon.customSpecPrice
-    ? chosenWeapon.customSpecPrice
-    : TIER_PRICES[chosenWeapon.tier].specPrice;
+  const specFabItem = specFab(chosenWeapon.name, chosenWeapon.specFabPrice);
 
-  return specFab(chosenWeapon.name, specPrice);
+  adjustSpecFabRarity(specFabItem);
+
+  return specFabItem;
 }
 
 /**
@@ -90,7 +96,7 @@ function randomSpecFab(): LootItem {
 function gambleProFab(): LootItem | null {
   const hasEarnedProKit = random(1, 100) >= 85;
   if (hasEarnedProKit) {
-    return randomProKit();
+    return randomProFab();
   }
 
   return null;
@@ -116,11 +122,37 @@ function gambleAustralium(): LootItem | null {
   return null;
 }
 
-function randomProKit(): LootItem {
+function randomProFab(): LootItem {
   const chosenWeapon = randomWeapon();
-  const proPrice = chosenWeapon.customProPrice
-    ? chosenWeapon.customProPrice
-    : TIER_PRICES[chosenWeapon.tier].proPrice;
+  const proFabItem = proFab(chosenWeapon.name, chosenWeapon.proFabPrice);
 
-  return proFab(chosenWeapon.name, proPrice);
+  adjustProFabRarity(proFabItem);
+
+  return proFabItem;
+}
+
+function adjustSpecFabRarity(specFab: LootItem) {
+  const uncommonPriceThreshold = 0.1;
+  const rarePriceThreshold = 1;
+
+  if (specFab.price >= uncommonPriceThreshold) {
+    specFab.rarity = "uncommon";
+  }
+
+  if (specFab.price >= rarePriceThreshold) {
+    specFab.rarity = "rare";
+  }
+}
+
+function adjustProFabRarity(proFab: LootItem) {
+  const rarePriceThreshold = 5;
+  const legendPriceThreshold = 20;
+
+  if (proFab.price >= rarePriceThreshold) {
+    proFab.rarity = "rare";
+  }
+
+  if (proFab.price >= legendPriceThreshold) {
+    proFab.rarity = "legendary";
+  }
 }

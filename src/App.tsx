@@ -36,7 +36,7 @@ function App() {
 
         <div className="valuables-panel">
           <div className="valuables-panel-header">
-            <h2>High Value Items</h2>
+            <h2>Valuable Fabricators</h2>
             <span className="valuables-count">{highValueFabs.length}</span>
           </div>
 

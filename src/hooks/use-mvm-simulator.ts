@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { basicKit, type LootItem } from "../types/loot-item";
+import type { LootItem } from "../types/loot-item";
 import { simulateTourCompletion } from "../utils/simulation-engine";
 import type { MvmSimulator } from "../types/mvm-simuator";
 import type { TourLoot } from "../types/tour-loot";
+import {
+  basicKit,
+  robotPartsCommon,
+  robotPartsPristine,
+} from "../data/loot-tables";
 
 const TICKET_COST_PER_TOUR = 0.99 * 4;
 
@@ -21,6 +26,12 @@ export function useMvmSimulator(): MvmSimulator {
 
       // Add this tour to the history
       setTourHistory((prev) => [tourLoot, ...prev]);
+
+      newDrops.push(robotPartsCommon(tourLoot.robotParts.common));
+
+      if (tourLoot.robotParts.rare > 0) {
+        newDrops.push(robotPartsPristine(tourLoot.robotParts.rare));
+      }
 
       newDrops.push(basicKit(tourLoot.basicKitPrice));
 
