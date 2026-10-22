@@ -1,6 +1,7 @@
 import React from "react";
 import type { SimulationStats } from "../../types/simulation-stats";
 import "./StatsBar.css";
+import { getDetailedTimeBreakdown } from "../../utils/time-util";
 
 interface Props {
   stats: SimulationStats;
@@ -25,12 +26,25 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
 
       <div className="stat-card">
         <label>Hours Played</label>
-        <span>{(stats.toursCompleted * 2.1).toLocaleString()}</span>
+
+        <div className="stat-card-details">
+          <span className="stat-value">
+            {(stats.toursCompleted * 2.1).toLocaleString()}
+          </span>
+          <span className="stat-subtitle">
+            {getDetailedTimeBreakdown(stats.toursCompleted * 2.1)}
+          </span>
+        </div>
       </div>
 
       <div className="stat-card">
         <label>Loot Value</label>
         <span>${stats.totalLootValue.toLocaleString()}</span>
+      </div>
+
+      <div className="stat-card">
+        <label>Golden Pans</label>
+        <span>{stats.panCount}</span>
       </div>
 
       <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
@@ -39,11 +53,6 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
           {isProfitable ? "+" : "-"}$
           {Math.abs(stats.netProfit).toLocaleString()}
         </span>
-      </div>
-
-      <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
-        <label>Returns on Interest</label>
-        <span>{stats.roiPercentage.toFixed(1)}%</span>
       </div>
 
       <div className="actions">

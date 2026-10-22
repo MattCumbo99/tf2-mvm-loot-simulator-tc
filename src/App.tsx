@@ -41,7 +41,7 @@ function App() {
           </div>
 
           <div className="valuables-scroll-area">
-            {highValueFabs.map((item) => (
+            {highValueFabs.slice(0, 20).map((item) => (
               <LootItemCard item={item} />
             ))}
           </div>
@@ -54,7 +54,7 @@ function App() {
           </div>
 
           <div className="valuables-scroll-area">
-            {australiums.map((item) => (
+            {australiums.slice(0, 50).map((item) => (
               <LootItemCard item={item} />
             ))}
           </div>

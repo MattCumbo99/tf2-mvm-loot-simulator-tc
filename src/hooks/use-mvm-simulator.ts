@@ -5,6 +5,7 @@ import type { MvmSimulator } from "../types/mvm-simuator";
 import type { TourLoot } from "../types/tour-loot";
 import {
   basicKit,
+  GOLDEN_PAN,
   robotPartsCommon,
   robotPartsPristine,
 } from "../data/loot-tables";
@@ -16,6 +17,7 @@ export function useMvmSimulator(): MvmSimulator {
   const [australiums, setAustraliums] = useState<LootItem[]>([]);
   const [highValueFabs, setHighValueFabs] = useState<LootItem[]>([]);
   const [tourHistory, setTourHistory] = useState<TourLoot[]>([]);
+  const [panCount, setPanCount] = useState(0);
   const [toursCompleted, setToursCompleted] = useState(0);
 
   const runSimulation = (count: number) => {
@@ -52,6 +54,11 @@ export function useMvmSimulator(): MvmSimulator {
 
       const earnedAustralium = tourLoot.australium;
       if (earnedAustralium) {
+        if (earnedAustralium === GOLDEN_PAN) {
+          alert("You have received The Golden Frying Pan!");
+          setPanCount((prev) => prev + 1);
+        }
+
         setAustraliums((prev) => [earnedAustralium, ...prev]);
         newDrops.push(earnedAustralium);
       }
@@ -66,6 +73,7 @@ export function useMvmSimulator(): MvmSimulator {
     setAustraliums([]);
     setHighValueFabs([]);
     setTourHistory([]);
+    setPanCount(0);
     setToursCompleted(0);
   };
 
@@ -85,6 +93,7 @@ export function useMvmSimulator(): MvmSimulator {
       totalSpent,
       totalLootValue,
       netProfit,
+      panCount,
       roiPercentage,
     },
     runSimulation,

@@ -3,5 +3,6 @@ export interface SimulationStats {
   totalSpent: number;
   totalLootValue: number;
   netProfit: number;
+  panCount: number;
   roiPercentage: number;
 }
