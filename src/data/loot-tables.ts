@@ -1,3 +1,4 @@
+import type { Killstreaker, WeaponSheen } from "../types/killstreak-effects";
 import type { LootItem } from "../types/loot-item";
 import type { WeaponDefinition } from "../types/weapon-definition";
 
@@ -885,6 +886,26 @@ export const WEAPON_REGISTRY: WeaponDefinition[] = [
     proFabPrice: 0.52,
   },
 ];
+
+export const SHEEN_MULTIPLIERS: Record<WeaponSheen, number> = {
+  "Team Shine": 0.35, // +35% price boost
+  "Villainous Violet": 0.15, // +15%
+  "Deadly Daffodil": 0.1, // +10%
+  Manndarin: 0.05, // +5%
+  "Agonizing Emerald": 0.0, // Base price
+  "Hot Rod": 0.0, // Base price
+  "Mean Green": 0.0, // Base price
+};
+
+export const KILLSTREAKER_MULTIPLIERS: Record<Killstreaker, number> = {
+  "Fire Horns": 0.5, // +50% price boost
+  Tornado: 0.3, // +30%
+  "Cerebral Discharge": 0.25, // +25%
+  Flames: 0.15, // +15%
+  Incinerator: 0.05, // +5%
+  Singularity: 0.0, // Base price
+  "Hypno-Beam": 0.0, // Base price
+};
 
 export function robotPartsCommon(quantity: number): LootItem {
   return {
