@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 import { LootItemCard } from "./components/LootItemCard/LootItemCard";
 import { StatsBar } from "./components/StatsBar/StatsBar";
@@ -13,6 +14,10 @@ function App() {
     runSimulation,
     resetSimulation,
   } = useMvmSimulator();
+
+  useEffect(() => {
+    document.title = "TF2 MvM Two Cities Loot Simulator";
+  });
 
   return (
     <div className="app-container">

@@ -132,8 +132,8 @@ function randomProFab(): LootItem {
 }
 
 function adjustSpecFabRarity(specFab: LootItem) {
-  const uncommonPriceThreshold = 0.1;
-  const rarePriceThreshold = 1;
+  const uncommonPriceThreshold = 0.05;
+  const rarePriceThreshold = 0.5;
 
   if (specFab.price >= uncommonPriceThreshold) {
     specFab.rarity = "uncommon";
@@ -145,11 +145,11 @@ function adjustSpecFabRarity(specFab: LootItem) {
 }
 
 function adjustProFabRarity(proFab: LootItem) {
-  const rarePriceThreshold = 5;
+  const epicPriceThreshold = 5;
   const legendPriceThreshold = 20;
 
-  if (proFab.price >= rarePriceThreshold) {
-    proFab.rarity = "rare";
+  if (proFab.price >= epicPriceThreshold) {
+    proFab.rarity = "epic";
   }
 
   if (proFab.price >= legendPriceThreshold) {

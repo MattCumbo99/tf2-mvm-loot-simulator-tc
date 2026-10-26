@@ -930,7 +930,7 @@ export function proFab(wepName: string, price: number): LootItem {
   return {
     id: `pro_fab_${wepName.toLowerCase().replace(/\s+/g, "_")}`,
     name: `Professional Killstreak ${wepName} Kit Fabricator`,
-    rarity: "uncommon",
+    rarity: "rare",
     price: price,
     image: "/items/pro_kit_fabricator.png",
   };
