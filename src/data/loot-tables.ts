@@ -946,25 +946,30 @@ export function basicKit(price: number): LootItem {
 }
 
 export function specFab(wepName: string, price: number): LootItem {
+  const sheen = randomSheen();
+
   return {
     id: `spec_fab_${wepName.toLowerCase().replace(/\s+/g, "_")}`,
     name: `Specialized Killstreak ${wepName} Kit Fabricator`,
     rarity: "common",
-    price: price,
+    price: adjustedPrice(price, sheen),
     image: "/items/spec_kit_fabricator.png",
-    sheen: randomSheen(),
+    sheen: sheen,
   };
 }
 
 export function proFab(wepName: string, price: number): LootItem {
+  const sheen = randomSheen();
+  const killstreaker = randomKillstreaker();
+
   return {
     id: `pro_fab_${wepName.toLowerCase().replace(/\s+/g, "_")}`,
     name: `Professional Killstreak ${wepName} Kit Fabricator`,
     rarity: "rare",
-    price: price,
+    price: adjustedPrice(price, sheen, killstreaker),
     image: "/items/pro_kit_fabricator.png",
-    sheen: randomSheen(),
-    killstreaker: randomKillstreaker(),
+    sheen: sheen,
+    killstreaker: killstreaker,
   };
 }
 
@@ -978,4 +983,22 @@ function randomKillstreaker(): Killstreaker {
   const maxNum = KILLSTREAKERS.length - 1;
 
   return KILLSTREAKERS.at(random(0, maxNum))!;
+}
+
+function adjustedPrice(
+  price: number,
+  sheen?: WeaponSheen,
+  killstreaker?: Killstreaker,
+): number {
+  let bonusMult = 0;
+
+  if (sheen) {
+    bonusMult += SHEEN_MULTIPLIERS[sheen];
+  }
+
+  if (killstreaker) {
+    bonusMult += KILLSTREAKER_MULTIPLIERS[killstreaker];
+  }
+
+  return price + price * bonusMult;
 }

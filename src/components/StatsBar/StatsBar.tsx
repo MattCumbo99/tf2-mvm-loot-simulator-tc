@@ -21,7 +21,7 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
 
       <div className="stat-card">
         <label>Money Spent</label>
-        <span>${stats.totalSpent.toLocaleString()}</span>
+        <span>${stats.totalSpent.toFixed(2)}</span>
       </div>
 
       <div className="stat-card">
@@ -39,7 +39,7 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
 
       <div className="stat-card">
         <label>Loot Value</label>
-        <span>${stats.totalLootValue.toLocaleString()}</span>
+        <span>${stats.totalLootValue.toFixed(2)}</span>
       </div>
 
       <div className="stat-card">
@@ -50,8 +50,7 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
       <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
         <label>Net Profit / Loss</label>
         <span>
-          {isProfitable ? "+" : "-"}$
-          {Math.abs(stats.netProfit).toLocaleString()}
+          {isProfitable ? "+" : "-"}${Math.abs(stats.netProfit).toFixed(2)}
         </span>
       </div>
 
