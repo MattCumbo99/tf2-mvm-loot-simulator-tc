@@ -102,7 +102,7 @@
 }
 
 .rarity-epic {
-  border-color: #ef4444;
+  border-color: #d104ff;
   background: linear-gradient(
     135deg,
     rgba(239, 68, 68, 0.15),
@@ -123,4 +123,32 @@
   border-color: #fff3a1;
   background: linear-gradient(135deg, #423200 0%, #1e1e1e 100%);
   box-shadow: 0 0 16px rgba(255, 215, 0, 0.8);
+}
+
+.item-effects {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+}
+
+.effect-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  color: #e0e0e0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sheen-tag {
+  color: #a3e635; /* Or dynamically color-code based on sheen name */
+}
+
+.killstreaker-tag {
+  color: #f97316;
 }

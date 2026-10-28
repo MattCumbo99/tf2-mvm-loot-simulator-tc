@@ -35,6 +35,28 @@ export const LootItemCard: React.FC<Props> = ({ item }) => {
           {item.name}
         </h4>
 
+        {/* Display Sheen & Killstreaker effects if present */}
+        {(item.sheen || item.killstreaker) && (
+          <div className="item-effects">
+            {item.sheen && (
+              <span
+                className="effect-tag sheen-tag"
+                title={`Sheen: ${item.sheen}`}
+              >
+                ✨ {item.sheen}
+              </span>
+            )}
+            {item.killstreaker && (
+              <span
+                className="effect-tag killstreaker-tag"
+                title={`Killstreaker: ${item.killstreaker}`}
+              >
+                🔥 {item.killstreaker}
+              </span>
+            )}
+          </div>
+        )}
+
         <div className="item-price">${item.price.toFixed(2)}</div>
       </div>
     </div>

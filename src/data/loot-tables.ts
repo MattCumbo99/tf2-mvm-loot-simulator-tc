@@ -1,6 +1,12 @@
-import type { Killstreaker, WeaponSheen } from "../types/killstreak-effects";
+import {
+  KILLSTREAKERS,
+  WEAPON_SHEENS,
+  type Killstreaker,
+  type WeaponSheen,
+} from "../types/killstreak-effects";
 import type { LootItem } from "../types/loot-item";
 import type { WeaponDefinition } from "../types/weapon-definition";
+import { random } from "../utils/randomizer";
 
 export const AUSTRALIUMS: LootItem[] = [
   {
@@ -144,6 +150,8 @@ export const GOLDEN_PAN: LootItem = {
   rarity: "mythic",
   price: 7895,
   image: "/items/gold_frying_pan.png",
+  sheen: randomSheen(),
+  killstreaker: randomKillstreaker(),
 };
 
 export const WEAPON_REGISTRY: WeaponDefinition[] = [
@@ -944,6 +952,7 @@ export function specFab(wepName: string, price: number): LootItem {
     rarity: "common",
     price: price,
     image: "/items/spec_kit_fabricator.png",
+    sheen: randomSheen(),
   };
 }
 
@@ -954,5 +963,19 @@ export function proFab(wepName: string, price: number): LootItem {
     rarity: "rare",
     price: price,
     image: "/items/pro_kit_fabricator.png",
+    sheen: randomSheen(),
+    killstreaker: randomKillstreaker(),
   };
+}
+
+function randomSheen(): WeaponSheen {
+  const maxNum = WEAPON_SHEENS.length - 1;
+
+  return WEAPON_SHEENS.at(random(0, maxNum))!;
+}
+
+function randomKillstreaker(): Killstreaker {
+  const maxNum = KILLSTREAKERS.length - 1;
+
+  return KILLSTREAKERS.at(random(0, maxNum))!;
 }

@@ -8,6 +8,7 @@ import type { LootItem } from "../types/loot-item";
 import type { TourLoot } from "../types/tour-loot";
 import type { WeaponDefinition } from "../types/weapon-definition";
 import { specFab } from "../data/loot-tables";
+import { random } from "./randomizer";
 
 /**
  * Simulates the completion of a tour and generates the resulting loot.
@@ -68,10 +69,6 @@ function gambleAdditionalSpecFabs(): LootItem[] {
   }
 
   return specFabs;
-}
-
-function random(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function randomWeapon(): WeaponDefinition {
