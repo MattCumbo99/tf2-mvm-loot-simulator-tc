@@ -1,5 +1,12 @@
+import {
+  KILLSTREAKERS,
+  WEAPON_SHEENS,
+  type Killstreaker,
+  type WeaponSheen,
+} from "../types/killstreak-effects";
 import type { LootItem } from "../types/loot-item";
 import type { WeaponDefinition } from "../types/weapon-definition";
+import { random } from "../utils/randomizer";
 
 export const AUSTRALIUMS: LootItem[] = [
   {
@@ -143,6 +150,8 @@ export const GOLDEN_PAN: LootItem = {
   rarity: "mythic",
   price: 7895,
   image: "/items/gold_frying_pan.png",
+  sheen: randomSheen(),
+  killstreaker: randomKillstreaker(),
 };
 
 export const WEAPON_REGISTRY: WeaponDefinition[] = [
@@ -886,6 +895,26 @@ export const WEAPON_REGISTRY: WeaponDefinition[] = [
   },
 ];
 
+export const SHEEN_MULTIPLIERS: Record<WeaponSheen, number> = {
+  "Team Shine": 0.35, // +35% price boost
+  "Villainous Violet": 0.15, // +15%
+  "Deadly Daffodil": 0.1, // +10%
+  Manndarin: 0.05, // +5%
+  "Agonizing Emerald": 0.0, // Base price
+  "Hot Rod": 0.0, // Base price
+  "Mean Green": 0.0, // Base price
+};
+
+export const KILLSTREAKER_MULTIPLIERS: Record<Killstreaker, number> = {
+  "Fire Horns": 0.5, // +50% price boost
+  Tornado: 0.3, // +30%
+  "Cerebral Discharge": 0.25, // +25%
+  Flames: 0.15, // +15%
+  Incinerator: 0.05, // +5%
+  Singularity: 0.0, // Base price
+  "Hypno-Beam": 0.0, // Base price
+};
+
 export function robotPartsCommon(quantity: number): LootItem {
   return {
     id: "robot_parts_common",
@@ -917,21 +946,59 @@ export function basicKit(price: number): LootItem {
 }
 
 export function specFab(wepName: string, price: number): LootItem {
+  const sheen = randomSheen();
+
   return {
     id: `spec_fab_${wepName.toLowerCase().replace(/\s+/g, "_")}`,
     name: `Specialized Killstreak ${wepName} Kit Fabricator`,
     rarity: "common",
-    price: price,
+    price: adjustedPrice(price, sheen),
     image: "/items/spec_kit_fabricator.png",
+    sheen: sheen,
   };
 }
 
 export function proFab(wepName: string, price: number): LootItem {
+  const sheen = randomSheen();
+  const killstreaker = randomKillstreaker();
+
   return {
     id: `pro_fab_${wepName.toLowerCase().replace(/\s+/g, "_")}`,
     name: `Professional Killstreak ${wepName} Kit Fabricator`,
     rarity: "rare",
-    price: price,
+    price: adjustedPrice(price, sheen, killstreaker),
     image: "/items/pro_kit_fabricator.png",
+    sheen: sheen,
+    killstreaker: killstreaker,
   };
+}
+
+function randomSheen(): WeaponSheen {
+  const maxNum = WEAPON_SHEENS.length - 1;
+
+  return WEAPON_SHEENS.at(random(0, maxNum))!;
+}
+
+function randomKillstreaker(): Killstreaker {
+  const maxNum = KILLSTREAKERS.length - 1;
+
+  return KILLSTREAKERS.at(random(0, maxNum))!;
+}
+
+function adjustedPrice(
+  price: number,
+  sheen?: WeaponSheen,
+  killstreaker?: Killstreaker,
+): number {
+  let bonusMult = 0;
+
+  if (sheen) {
+    bonusMult += SHEEN_MULTIPLIERS[sheen];
+  }
+
+  if (killstreaker) {
+    bonusMult += KILLSTREAKER_MULTIPLIERS[killstreaker];
+  }
+
+  return price + price * bonusMult;
 }
