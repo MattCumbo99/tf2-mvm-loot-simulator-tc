@@ -1,10 +1,21 @@
 import type React from "react";
 import type { LootItem } from "../../types/loot-item";
 import "./LootItemCard.css";
+import type { Killstreaker } from "../../types/killstreak-effects";
 
 interface Props {
   item: LootItem;
 }
+
+const KILLSTREAKER_EMOJIS: Record<Killstreaker, string> = {
+  "Cerebral Discharge": "⚡",
+  "Fire Horns": "🐦‍🔥",
+  Flames: "🔥",
+  "Hypno-Beam": "🌀",
+  Incinerator: "🌋",
+  Singularity: "☄️",
+  Tornado: "🌪️",
+};
 
 export const LootItemCard: React.FC<Props> = ({ item }) => {
   // Convert to rarity string for CSS class matching
@@ -41,9 +52,11 @@ export const LootItemCard: React.FC<Props> = ({ item }) => {
             {item.sheen && (
               <span
                 className="effect-tag sheen-tag"
+                data-sheen={item.sheen.toLowerCase().replace(/\s+/g, "-")}
                 title={`Sheen: ${item.sheen}`}
               >
-                ✨ {item.sheen}
+                <span className="sheen-emoji">✨</span>
+                <span className="sheen-text">{item.sheen}</span>
               </span>
             )}
             {item.killstreaker && (
@@ -51,7 +64,7 @@ export const LootItemCard: React.FC<Props> = ({ item }) => {
                 className="effect-tag killstreaker-tag"
                 title={`Killstreaker: ${item.killstreaker}`}
               >
-                🔥 {item.killstreaker}
+                {KILLSTREAKER_EMOJIS[item.killstreaker]!} {item.killstreaker}
               </span>
             )}
           </div>
