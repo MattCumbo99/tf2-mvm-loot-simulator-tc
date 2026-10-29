@@ -1000,5 +1000,10 @@ function adjustedPrice(
     bonusMult += KILLSTREAKER_MULTIPLIERS[killstreaker];
   }
 
+  // Drastically increase the price on the ultimate combination (TS + FH)
+  if (sheen === "Team Shine" && killstreaker === "Fire Horns") {
+    bonusMult += 1;
+  }
+
   return price + price * bonusMult;
 }
