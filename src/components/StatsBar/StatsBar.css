@@ -44,6 +44,8 @@
   align-items: flex-end;
   gap: 5px;
   max-width: 100%;
+  position: relative;
+  padding-bottom: 0.8rem;
 }
 
 .stat-value {
@@ -58,9 +60,15 @@
   color: #6b7280;
   font-weight: 500;
   text-align: right;
-  max-width: 200px; /* Adjust this width so it wraps nicely under the hours */
-  word-wrap: break-word;
   line-height: 1.2;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profit {
