@@ -4,7 +4,6 @@ import type { TourLoot } from "./tour-loot";
 
 export interface MvmSimulator {
   tours: TourLoot[];
-  inventory: LootItem[];
   australiums: LootItem[];
   highValueFabs: LootItem[];
   stats: SimulationStats;

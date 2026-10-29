@@ -13,12 +13,12 @@ import {
 const TICKET_COST_PER_TOUR = 0.99 * 4;
 
 export function useMvmSimulator(): MvmSimulator {
-  const [inventory, setInventory] = useState<LootItem[]>([]);
   const [australiums, setAustraliums] = useState<LootItem[]>([]);
   const [highValueFabs, setHighValueFabs] = useState<LootItem[]>([]);
   const [tourHistory, setTourHistory] = useState<TourLoot[]>([]);
   const [panCount, setPanCount] = useState(0);
   const [toursCompleted, setToursCompleted] = useState(0);
+  const [totalLootValue, setTotalLootValue] = useState(0);
 
   const runSimulation = (count: number) => {
     const newDrops: LootItem[] = [];
@@ -64,12 +64,12 @@ export function useMvmSimulator(): MvmSimulator {
       }
     }
 
-    setInventory((prev) => [...prev, ...newDrops]);
+    setTotalLootValue((prev) => prev + getLootValue(newDrops));
     setToursCompleted((prev) => prev + count);
   };
 
   const resetSimulation = () => {
-    setInventory([]);
+    setTotalLootValue(0);
     setAustraliums([]);
     setHighValueFabs([]);
     setTourHistory([]);
@@ -78,14 +78,12 @@ export function useMvmSimulator(): MvmSimulator {
   };
 
   const totalSpent = toursCompleted * TICKET_COST_PER_TOUR;
-  const totalLootValue = inventory.reduce((sum, item) => sum + item.price, 0);
   const netProfit = totalLootValue - totalSpent;
   const roiPercentage =
     totalSpent > 0 ? (totalLootValue / totalSpent) * 100 : 0;
 
   return {
     tours: tourHistory,
-    inventory,
     australiums,
     highValueFabs,
     stats: {
@@ -99,4 +97,8 @@ export function useMvmSimulator(): MvmSimulator {
     runSimulation,
     resetSimulation,
   };
+}
+
+function getLootValue(items: LootItem[]): number {
+  return items.reduce((sum, item) => sum + item.price, 0);
 }
