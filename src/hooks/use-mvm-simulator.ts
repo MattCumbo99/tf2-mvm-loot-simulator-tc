@@ -22,50 +22,76 @@ export function useMvmSimulator(): MvmSimulator {
 
   const runSimulation = (count: number) => {
     const newDrops: LootItem[] = [];
+    const curTourHistory: TourLoot[] = [];
+    const curHighValueFabs: LootItem[] = [];
+    const curAustraliums: LootItem[] = [];
+
+    let curPanCount = 0;
 
     for (let i = 0; i < count; i++) {
+      // Run a tour simulation and record it in the current history
       const tourLoot = simulateTourCompletion();
+      curTourHistory.push(tourLoot);
 
-      // Add this tour to the history
-      setTourHistory((prev) => [tourLoot, ...prev]);
+      const roboParts = tourLoot.robotParts;
 
-      newDrops.push(robotPartsCommon(tourLoot.robotParts.common));
+      // Add the guaranteed robot parts to the drops
+      const roboPartsCommonItem = robotPartsCommon(roboParts.common);
+      newDrops.push(roboPartsCommonItem);
 
-      if (tourLoot.robotParts.rare > 0) {
-        newDrops.push(robotPartsPristine(tourLoot.robotParts.rare));
+      // Add pristine parts if earned
+      if (roboParts.rare > 0) {
+        const roboPartsPristineItem = robotPartsPristine(roboParts.rare);
+
+        newDrops.push(roboPartsPristineItem);
       }
 
-      newDrops.push(basicKit(tourLoot.basicKitPrice));
+      // Add the guaranteed normal killstreak kit earned to the drops
+      const basicKitItem = basicKit(tourLoot.basicKitPrice);
+      newDrops.push(basicKitItem);
 
       // Add guaranteed spec fabricator
       newDrops.push(tourLoot.specFabricator);
 
+      // Add additional spec fabricators earned
       tourLoot.additionalSpecFabs.forEach((fab) => newDrops.push(fab));
 
+      // Check if this tour earned a pro fabricator
       const earnedProFab = tourLoot.proFabricator;
       if (earnedProFab) {
         // Check if this professional kit is high value
         if (earnedProFab.price >= 10) {
-          setHighValueFabs((prev) => [earnedProFab, ...prev]);
+          curHighValueFabs.push(earnedProFab);
         }
 
         newDrops.push(earnedProFab);
       }
 
+      // Check for earned australium
       const earnedAustralium = tourLoot.australium;
       if (earnedAustralium) {
         if (earnedAustralium === GOLDEN_PAN) {
-          alert("You have received The Golden Frying Pan!");
-          setPanCount((prev) => prev + 1);
+          curPanCount += 1;
         }
 
-        setAustraliums((prev) => [earnedAustralium, ...prev]);
+        curAustraliums.push(earnedAustralium);
         newDrops.push(earnedAustralium);
       }
     }
 
+    // Write to each state after the simulations complete
+    setTourHistory((prev) => [...curTourHistory, ...prev]);
     setTotalLootValue((prev) => prev + getLootValue(newDrops));
     setToursCompleted((prev) => prev + count);
+    setPanCount((prev) => prev + curPanCount);
+
+    if (curHighValueFabs.length > 0) {
+      setHighValueFabs((prev) => [...curHighValueFabs, ...prev]);
+    }
+
+    if (curAustraliums.length > 0) {
+      setAustraliums((prev) => [...curAustraliums, ...prev]);
+    }
   };
 
   const resetSimulation = () => {

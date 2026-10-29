@@ -1,6 +1,9 @@
 import type { ItemRarity } from "./item-rarity";
 import type { Killstreaker, WeaponSheen } from "./killstreak-effects";
 
+/**
+ * Represents a single earned item from a tour.
+ */
 export interface LootItem {
   id: string;
   name: string;
