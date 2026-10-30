@@ -1,0 +1,82 @@
+.stat-row-tour {
+  background-color: #1a202c;
+  border: 1px solid #2d3748;
+  border-radius: 6px;
+  overflow: hidden;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.stat-row-tour:not(.stat-row-tour-disabled):hover {
+  background-color: #212936;
+  border-color: #374151;
+}
+
+.stat-row-tour-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Disabled styling when tourData is undefined */
+.stat-row-tour-disabled {
+  opacity: 0.55;
+  background-color: #151922;
+  border-color: #1f2937;
+  cursor: not-allowed;
+}
+
+.stat-row-tour-disabled .stat-row-tour-header {
+  cursor: not-allowed;
+}
+
+.stat-row-tour-label {
+  font-size: 0.875rem;
+  color: #f3f4f6;
+  font-weight: 500;
+}
+
+.stat-row-tour-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-row-tour-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.stat-row-tour-status.clickable {
+  color: #60a5fa; /* Soft accent blue for expandable hint */
+}
+
+.stat-row-tour-status.insufficient {
+  color: #6b7280; /* Grayed out insufficient data label */
+  font-style: italic;
+}
+
+.arrow {
+  font-size: 0.65rem;
+  color: #9ca3af;
+}
+
+/* Expansion drawer */
+.stat-row-tour-expansion {
+  background-color: #111827;
+  border-top: 1px solid #2d3748;
+  padding: 0.75rem;
+}
+
+.tour-details-content pre {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-all;
+}

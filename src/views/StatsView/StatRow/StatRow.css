@@ -1,0 +1,39 @@
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.625rem 0.75rem;
+  background-color: #1a202c; /* Subtle background panel */
+  border: 1px solid #2d3748;
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.stat-row:hover {
+  background-color: #212936;
+  border-color: #374151;
+}
+
+.stat-row-label {
+  font-size: 0.875rem;
+  color: #9ca3af; /* Soft gray for secondary text */
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 1rem;
+}
+
+.stat-row-value {
+  font-size: 0.95rem;
+  color: #f3f4f6; /* High-contrast white for primary numbers */
+  font-weight: 600;
+  /* Monospace tabular numbers ensure vertical alignment across stacked rows */
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

@@ -1,3 +1,5 @@
+import type { MvmTour } from "./mvm-tour";
+
 /**
  * A grouped data field holding overall statistics of prior tour simulations.
  */
@@ -26,4 +28,12 @@ export interface SimulationStats {
    * Percentage earned back on earnings.
    */
   roiPercentage: number;
+
+  totalRobotParts: number;
+  firstPanTourNum?: number;
+  specFabCount: number;
+  proFabCount: number;
+  australiumCount: number;
+  mostProfitableTour?: MvmTour;
+  leastProfitableTour?: MvmTour;
 }

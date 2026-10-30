@@ -1,5 +1,3 @@
-import type React from "react";
-import type { TourLoot } from "../../types/tour-loot";
 import "./TourSummaryCard.css";
 import { LootItemCard } from "../LootItemCard/LootItemCard";
 import { memo } from "react";
@@ -8,16 +6,14 @@ import {
   robotPartsCommon,
   robotPartsPristine,
 } from "../../data/loot-tables";
+import type { MvmTour } from "../../types/mvm-tour";
 
-interface Props {
-  tourNumber: number;
-  tourRewards: TourLoot;
+interface TourSummaryCardProps {
+  tour: MvmTour;
 }
 
-const TourSummaryCardComponent: React.FC<Props> = ({
-  tourNumber,
-  tourRewards,
-}) => {
+function TourSummaryCardComponent({ tour }: TourSummaryCardProps) {
+  const tourRewards = tour.tourLoot;
   const roboPartItem = robotPartsCommon(tourRewards.robotParts.common);
   const hasPristineParts = tourRewards.robotParts.rare > 0;
 
@@ -25,7 +21,7 @@ const TourSummaryCardComponent: React.FC<Props> = ({
     <div className="tour-summary-card">
       <div className="tour-card-header">
         <h3 className="tour-number-title">
-          Tour <span className="tour-number-highlight">#{tourNumber}</span>
+          Tour <span className="tour-number-highlight">#{tour.tourNumber}</span>
         </h3>
       </div>
 
@@ -57,6 +53,6 @@ const TourSummaryCardComponent: React.FC<Props> = ({
       </div>
     </div>
   );
-};
+}
 
 export const TourSummaryCard = memo(TourSummaryCardComponent);

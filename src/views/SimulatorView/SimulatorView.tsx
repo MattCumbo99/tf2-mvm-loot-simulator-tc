@@ -1,19 +1,14 @@
 import { LootItemCard } from "../../components/LootItemCard/LootItemCard";
 import { StatsBar } from "../../components/StatsBar/StatsBar";
 import { TourSummaryCard } from "../../components/TourSummaryCard/TourSummaryCard";
-import { useMvmSimulator } from "../../hooks/use-mvm-simulator";
+import type { MvmSimulator } from "../../types/mvm-simuator";
 import "./SimulatorView.css";
 
-export function SimulatorView() {
-  const {
-    tours,
-    australiums,
-    highValueFabs,
-    stats,
-    runSimulation,
-    resetSimulation,
-  } = useMvmSimulator();
+interface SimulatorViewProps {
+  simulator: MvmSimulator;
+}
 
+export function SimulatorView({ simulator }: SimulatorViewProps) {
   return (
     <div className="simulator-container">
       <header className="simulator-header">
@@ -28,20 +23,22 @@ export function SimulatorView() {
       <div className="top-dashboard-container">
         <div className="stats-panel">
           <StatsBar
-            stats={stats}
-            onSimulate={runSimulation}
-            onReset={resetSimulation}
+            stats={simulator.stats}
+            onSimulate={simulator.runSimulation}
+            onReset={simulator.resetSimulation}
           />
         </div>
 
         <div className="valuables-panel">
           <div className="valuables-panel-header">
             <h2>Valuable Fabricators</h2>
-            <span className="valuables-count">{highValueFabs.length}</span>
+            <span className="valuables-count">
+              {simulator.highValueFabs.length}
+            </span>
           </div>
 
           <div className="valuables-scroll-area">
-            {highValueFabs.slice(0, 20).map((item) => (
+            {simulator.highValueFabs.slice(0, 20).map((item) => (
               <LootItemCard item={item} />
             ))}
           </div>
@@ -50,11 +47,13 @@ export function SimulatorView() {
         <div className="valuables-panel">
           <div className="valuables-panel-header">
             <h2>Australiums</h2>
-            <span className="valuables-count">{australiums.length}</span>
+            <span className="valuables-count">
+              {simulator.australiums.length}
+            </span>
           </div>
 
           <div className="valuables-scroll-area">
-            {australiums.slice(0, 50).map((item) => (
+            {simulator.australiums.slice(0, 50).map((item) => (
               <LootItemCard item={item} />
             ))}
           </div>
@@ -62,11 +61,8 @@ export function SimulatorView() {
       </div>
 
       <div className="tour-history-list">
-        {tours.slice(0, 50).map((tour, index) => (
-          <TourSummaryCard
-            tourRewards={tour}
-            tourNumber={tours.length - index}
-          />
+        {simulator.tours.slice(0, 50).map((tour) => (
+          <TourSummaryCard tour={tour} />
         ))}
       </div>
     </div>

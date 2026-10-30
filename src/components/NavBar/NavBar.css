@@ -1,0 +1,51 @@
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #1a202c; /* Deep dark container background */
+  border-bottom: 1px solid #2d3748; /* Subtle separator border */
+}
+
+.navbar-header h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 6px;
+  background-color: #111827; /* Inner pill container background */
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+}
+
+/* Base styles for buttons inside the navigation */
+.tab-navigation button {
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.tab-navigation button:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tab-navigation .active {
+  color: #ffffff;
+  background-color: #3b82f6; /* Clean accent blue for the active tab */
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
