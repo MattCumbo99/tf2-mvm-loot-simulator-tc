@@ -21,7 +21,10 @@ function TourSummaryCardComponent({ tour }: TourSummaryCardProps) {
     <div className="tour-summary-card">
       <div className="tour-card-header">
         <h3 className="tour-number-title">
-          Tour <span className="tour-number-highlight">#{tour.tourNumber}</span>
+          Tour{" "}
+          <span className="tour-number-highlight">
+            #{tour.tourNumber.toLocaleString()}
+          </span>
         </h3>
       </div>
 

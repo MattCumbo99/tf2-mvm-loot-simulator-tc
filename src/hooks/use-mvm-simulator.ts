@@ -16,7 +16,10 @@ export function useMvmSimulator(): MvmSimulator {
   const [australiums, setAustraliums] = useState<LootItem[]>([]);
   const [highValueFabs, setHighValueFabs] = useState<LootItem[]>([]);
   const [tourHistory, setTourHistory] = useState<MvmTour[]>([]);
+
   const [panCount, setPanCount] = useState(0);
+  const [firstPanTourNum, setFirstPanTourNum] = useState<number>();
+
   const [totalLootValue, setTotalLootValue] = useState(0);
 
   const [specFabCount, setSpecFabCount] = useState(0);
@@ -30,6 +33,7 @@ export function useMvmSimulator(): MvmSimulator {
     setAustraliums([]);
     setHighValueFabs([]);
     setTourHistory([]);
+    setFirstPanTourNum(undefined);
     setPanCount(0);
     setTotalLootValue(0);
     setSpecFabCount(0);
@@ -105,6 +109,11 @@ export function useMvmSimulator(): MvmSimulator {
       if (earnedAustralium) {
         if (earnedAustralium === GOLDEN_PAN) {
           curPanCount += 1;
+
+          // If this is the first pan, record the tour number
+          if (!firstPanTourNum) {
+            setFirstPanTourNum(curTourNumber + 1);
+          }
         }
 
         curAustraliums.push(earnedAustralium);
@@ -172,6 +181,7 @@ export function useMvmSimulator(): MvmSimulator {
       roiPercentage,
       australiumCount: australiums.length,
       totalRobotParts: roboPartCount,
+      firstPanTourNum,
       specFabCount,
       proFabCount,
       mostProfitableTour: bestTour,

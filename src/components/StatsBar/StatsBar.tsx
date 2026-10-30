@@ -2,6 +2,7 @@ import React from "react";
 import type { SimulationStats } from "../../types/simulation-stats";
 import "./StatsBar.css";
 import { getDetailedTimeBreakdown } from "../../utils/time-util";
+import { formatCurrency } from "../../utils/currency-util";
 
 interface Props {
   stats: SimulationStats;
@@ -21,7 +22,7 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
 
       <div className="stat-card">
         <label>Money Spent</label>
-        <span>${stats.totalSpent.toFixed(2)}</span>
+        <span>{formatCurrency(stats.totalSpent)}</span>
       </div>
 
       <div className="stat-card">
@@ -39,19 +40,17 @@ export const StatsBar: React.FC<Props> = ({ stats, onSimulate, onReset }) => {
 
       <div className="stat-card">
         <label>Loot Value</label>
-        <span>${stats.totalLootValue.toFixed(2)}</span>
+        <span>{formatCurrency(stats.totalLootValue)}</span>
       </div>
 
       <div className="stat-card">
         <label>Golden Pans</label>
-        <span>{stats.panCount}</span>
+        <span>{stats.panCount.toLocaleString()}</span>
       </div>
 
       <div className={`stat-card ${isProfitable ? "profit" : "loss"}`}>
         <label>Net Profit / Loss</label>
-        <span>
-          {isProfitable ? "+" : "-"}${Math.abs(stats.netProfit).toFixed(2)}
-        </span>
+        <span>{formatCurrency(stats.netProfit)}</span>
       </div>
 
       <div className="actions">

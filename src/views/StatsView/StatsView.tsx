@@ -1,4 +1,5 @@
 import type { SimulationStats } from "../../types/simulation-stats";
+import { formatCurrency } from "../../utils/currency-util";
 import { getDetailedTimeBreakdown } from "../../utils/time-util";
 import { StatRow } from "./StatRow/StatRow";
 import { StatRowTour } from "./StatRowTour/StatRowTour";
@@ -16,37 +17,49 @@ export function StatsView({ stats }: StatsViewProps) {
         value={stats.toursCompleted.toLocaleString()}
       />
 
-      <StatRow name="Money Spent" value={`$${stats.totalSpent.toFixed(2)}`} />
+      <StatRow name="Money Spent" value={formatCurrency(stats.totalSpent)} />
 
       <StatRow
         name="Total Playtime"
         value={getDetailedTimeBreakdown(stats.toursCompleted * 2.1)}
       />
 
-      <StatRow
-        name="Loot Value"
-        value={`$${stats.totalLootValue.toFixed(2)}`}
-      />
+      <StatRow name="Loot Value" value={formatCurrency(stats.totalLootValue)} />
 
       <StatRow
         name="Golden Pans Received"
         value={stats.panCount.toLocaleString()}
       />
 
-      <StatRow name="Tour Number of First Pan" value="(Insufficient Data)" />
+      <StatRow
+        name="Tour Number of First Pan"
+        value={stats.firstPanTourNum?.toLocaleString()}
+      />
 
       <StatRow
         name="Net Profit / Loss"
-        value={`$${stats.netProfit.toFixed(2)}`}
+        value={formatCurrency(stats.netProfit)}
       />
 
-      <StatRow name="Robot Parts Collected" value="0" />
+      <StatRow
+        name="Robot Parts Collected"
+        value={stats.totalRobotParts.toLocaleString()}
+      />
 
-      <StatRow name="Specialized Fabricators Earned" value="0" />
+      <StatRow
+        name="Specialized Fabricators Earned"
+        value={stats.specFabCount.toLocaleString()}
+      />
 
-      <StatRow name="Professional Fabricators Earned" value="0" />
+      <StatRow
+        name="Professional Fabricators Earned"
+        value={stats.proFabCount.toLocaleString()}
+      />
 
-      <StatRow name="Australiums Earned" value="0" />
+      <StatRow
+        name="Australiums Earned"
+        value={stats.australiumCount.toLocaleString()}
+      />
 
       <StatRowTour
         name="Most Profitable Tour (excluding pans)"
