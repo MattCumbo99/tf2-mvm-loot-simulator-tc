@@ -48,22 +48,22 @@ export function StatsView({ stats }: StatsViewProps) {
 
       <StatRow
         name="Specialized Fabricators Earned"
-        value={stats.specFabCount.toLocaleString()}
+        value={stats.totalSpecFabs.toLocaleString()}
       />
 
       <StatRow
         name="Professional Fabricators Earned"
-        value={stats.proFabCount.toLocaleString()}
+        value={stats.totalProFabs.toLocaleString()}
       />
 
       <StatRow
         name="Australiums Earned"
-        value={stats.australiumCount.toLocaleString()}
+        value={stats.totalAustraliums.toLocaleString()}
       />
 
       <StatRowTour
         name="Most Profitable Tour (excluding pans)"
-        tourData={stats.mostProfitableTour}
+        tourData={stats.bestTour}
       />
 
       <StatRowTour

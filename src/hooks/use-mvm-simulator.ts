@@ -9,6 +9,7 @@ import {
   robotPartsPristine,
 } from "../data/loot-tables";
 import type { MvmTour } from "../types/mvm-tour";
+import type { LootItemStat } from "../types/simulation-stats";
 
 const TICKET_COST_PER_TOUR = 0.99 * 4;
 
@@ -27,7 +28,15 @@ export function useMvmSimulator(): MvmSimulator {
   const [roboPartCount, setRoboPartCount] = useState(0);
 
   const [bestTour, setBestTour] = useState<MvmTour>();
-  const [worstTour, setWorstTour] = useState<MvmTour>();
+  const [bestProFab, setBestProFab] = useState<LootItemStat>();
+
+  const [totalBreakEvenTours, setTotalBreakEvenTours] = useState(0);
+
+  const [longestUnluckyStreak, setLongestUnluckyStreak] = useState(0);
+  let isUnluckyStreak = false;
+
+  const [longestLuckyStreak, setLongestLuckyStreak] = useState(0);
+  let isLuckyStreak = false;
 
   const resetSimulation = () => {
     setAustraliums([]);
@@ -40,7 +49,9 @@ export function useMvmSimulator(): MvmSimulator {
     setProFabCount(0);
     setRoboPartCount(0);
     setBestTour(undefined);
-    setWorstTour(undefined);
+    setBestProFab(undefined);
+    setLongestUnluckyStreak(0);
+    setLongestLuckyStreak(0);
   };
 
   const runSimulation = (count: number) => {
@@ -56,7 +67,14 @@ export function useMvmSimulator(): MvmSimulator {
     let curTourNumber = tourHistory.length + 1;
 
     let curBestTour: MvmTour | undefined = bestTour;
-    let curWorstTour: MvmTour | undefined = worstTour;
+
+    let curLuckStreak = 0;
+    // Check if we are currently in either longest streak
+    if (isLuckyStreak) {
+      curLuckStreak = longestLuckyStreak;
+    } else if (isUnluckyStreak) {
+      curLuckStreak = -1 * longestUnluckyStreak;
+    }
 
     for (let i = 0; i < count; i++) {
       const currentDrops: LootItem[] = [];
@@ -133,10 +151,8 @@ export function useMvmSimulator(): MvmSimulator {
         curBestTour = currentTour;
       }
 
-      const isWorstTour =
-        !curWorstTour || curWorstTour.tourEarnings > currentTour.tourEarnings;
-      if (isWorstTour) {
-        curWorstTour = currentTour;
+      if (isTourLucky(currentTour)) {
+        // TODO: Adjust streaks accordingly
       }
 
       // Append the drop data to the total tracker
@@ -152,7 +168,6 @@ export function useMvmSimulator(): MvmSimulator {
     setSpecFabCount((prev) => prev + curSpecFabCount);
     setProFabCount((prev) => prev + curProFabCount);
     setBestTour(curBestTour);
-    setWorstTour(curWorstTour);
 
     if (curHighValueFabs.length > 0) {
       setHighValueFabs((prev) => [...curHighValueFabs, ...prev]);
@@ -179,13 +194,16 @@ export function useMvmSimulator(): MvmSimulator {
       netProfit,
       panCount,
       roiPercentage,
-      australiumCount: australiums.length,
+      totalAustraliums: australiums.length,
       totalRobotParts: roboPartCount,
       firstPanTourNum,
-      specFabCount,
-      proFabCount,
-      mostProfitableTour: bestTour,
-      leastProfitableTour: worstTour,
+      totalSpecFabs: specFabCount,
+      totalProFabs: proFabCount,
+      bestTour,
+      bestProFab,
+      longestLuckyStreak,
+      longestUnluckyStreak,
+      totalBreakEvenTours,
     },
     runSimulation,
     resetSimulation,
@@ -194,4 +212,10 @@ export function useMvmSimulator(): MvmSimulator {
 
 function getLootValue(items: LootItem[]): number {
   return items.reduce((sum, item) => sum + item.price, 0);
+}
+
+function isTourLucky(tour: MvmTour): boolean {
+  const loot = tour.tourLoot;
+
+  return loot.proFabricator !== null || loot.australium !== null;
 }

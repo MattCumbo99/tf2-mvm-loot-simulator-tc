@@ -1,9 +1,4 @@
-import {
-  KILLSTREAKERS,
-  WEAPON_SHEENS,
-  type Killstreaker,
-  type WeaponSheen,
-} from "../types/killstreak-effects";
+import type { Killstreaker, WeaponSheen } from "../types/killstreak-effects";
 import type { LootItem } from "../types/loot-item";
 import type { WeaponDefinition } from "../types/weapon-definition";
 import { random } from "../utils/randomizer";
@@ -142,6 +137,32 @@ export const AUSTRALIUMS: LootItem[] = [
     price: 39.99,
     image: "/items/aus_knife.png",
   },
+];
+
+/**
+ * Array of every possible weapon sheen effect.
+ */
+export const WEAPON_SHEENS: WeaponSheen[] = [
+  "Mean Green",
+  "Hot Rod",
+  "Agonizing Emerald",
+  "Manndarin",
+  "Deadly Daffodil",
+  "Villainous Violet",
+  "Team Shine",
+];
+
+/**
+ * Array of every possible killstreaker effect.
+ */
+export const KILLSTREAKERS: Killstreaker[] = [
+  "Hypno-Beam",
+  "Singularity",
+  "Incinerator",
+  "Flames",
+  "Cerebral Discharge",
+  "Tornado",
+  "Fire Horns",
 ];
 
 export const GOLDEN_PAN: LootItem = {
