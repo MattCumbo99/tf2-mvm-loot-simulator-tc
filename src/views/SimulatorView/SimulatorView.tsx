@@ -8,6 +8,8 @@ interface SimulatorViewProps {
   simulator: MvmSimulator;
 }
 
+const MAX_DISPLAYED_TOURS = 50;
+
 export function SimulatorView({ simulator }: SimulatorViewProps) {
   return (
     <div className="simulator-container">
@@ -29,7 +31,7 @@ export function SimulatorView({ simulator }: SimulatorViewProps) {
       </div>
 
       <div className="tour-history-list">
-        {simulator.tours.slice(0, 50).map((tour) => (
+        {simulator.tours.slice(0, MAX_DISPLAYED_TOURS).map((tour) => (
           <TourSummaryCard tour={tour} />
         ))}
       </div>
