@@ -1,0 +1,38 @@
+.grouping-panel {
+  width: 320px;
+  background-color: #1a1a1a;
+  border: 1px solid #d97706;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.15);
+}
+
+.grouping-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.grouping-panel-count {
+  background-color: rgba(251, 191, 36, 0.5);
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.item-area {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-right: 6px;
+}
