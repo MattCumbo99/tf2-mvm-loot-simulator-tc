@@ -7,7 +7,7 @@ import { useMvmSimulator } from "./hooks/use-mvm-simulator";
 
 function App() {
   useEffect(() => {
-    document.title = "TF2 MvM Two Cities Loot Simulator";
+    document.title = "Two Cities Loot Simulator";
   });
 
   const [activeTab, setActiveTab] = useState<ActiveTab>("simulator");
